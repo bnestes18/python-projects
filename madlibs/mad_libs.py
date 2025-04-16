@@ -16,11 +16,11 @@ def play_game():
 
     # Print final MadLibs Story
     print("\n--------------------------")
-    print("Be kind to your " + noun + " - footed, " + p_noun)
-    print("For a duck may be somebody's " + noun2 + ",")
-    print("Be kind to your " + p_noun + " in " + place)
-    print("Where the weather is always " + adjective + "\n")
-    print("You may thing that this is the " + noun3 + ",")
+    print(f"Be kind to your {noun} - footed, {p_noun}")
+    print(f"For a duck may be somebody's {noun2},")
+    print(f"Be kind to your {p_noun} in {place}")
+    print(f"Where the weather is always {adjective}.")
+    print(f"You may thing that this is the {noun3}")
     print("Well, it is.")
     print("\n--------------------------")
 
