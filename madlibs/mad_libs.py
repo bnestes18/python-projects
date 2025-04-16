@@ -26,8 +26,7 @@ def play_game():
 
 while True:
     play_game()
-    play_again = input("\nWould you like to play again? Y/N\n")
-    if play_again != "Y":
+    # Ask if user wants to play again
         print("\nThanks for playing!\n")
         break
     
