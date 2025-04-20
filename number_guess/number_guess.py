@@ -41,6 +41,7 @@ def start_game():
                 
                 if play != "yes":
                     print("No worries. Until next time!\n")
+                    break
                 else:
                     guesses = 0
                     num_to_guess = random.randint(1, 10)
