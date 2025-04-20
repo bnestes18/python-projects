@@ -56,9 +56,10 @@ def start_game():
         except ValueError as err:
             print("Oh no! That is not a valid number. Try again!\n")
             print(err)
-
-
-start_game()
+            
+# Run only when executed directly
+if __name__ == "__main__":
+    start_game()
                 
     
 
