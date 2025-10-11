@@ -22,6 +22,8 @@ Must provide absolute path. Edit this line!!!
 """
 source_folder = Path("/Users/estesb1/code/python/python-projects/portfolio/SmartFileOrganizer/files")
 
+DRY_RUN = True
+
 """ 
 Returns category name from given file extension 
 Example .jpg extension -> Images
@@ -59,9 +61,12 @@ def organize_files():
             # Define destination path
             dest_folder = target_folder / item.name
             try:
-                # Move files from source to destination folder
-                move(item, dest_folder)
-                logging.info(f"Moving [{item.name}] to [{dest_folder}]\n")
+                if DRY_RUN:
+                    logging.info(f"[DRY RUN MODE] Would move '{item.name}' to '{target_folder}'")
+                else: 
+                    # Move files from source to destination folder
+                    move(item, dest_folder)
+                    logging.info(f"Moving [{item.name}] to [{target_folder}]\n")
             except Exception as e:
                 logging.error(f"Error moving '[{item.name}]': {e}\n")
 
