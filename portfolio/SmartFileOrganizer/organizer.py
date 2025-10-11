@@ -33,6 +33,14 @@ def get_category(file_suffix):
 
 # Iterate through source folder
 def organize_files():
+    if not source_folder.exists or not source_folder.is_dir():
+        logging.error("The specified source folder either does not exist or is not a directory.")
+        return
+        
+    # Create the organized folder structure
+    organized = source_folder / "Organized"
+    organized.mkdir(parents=True, exist_ok=True)
+    
     for item in source_folder.iterdir():
         # print(file.name)
         if item.is_file():
