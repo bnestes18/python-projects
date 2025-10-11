@@ -9,6 +9,7 @@ from pathlib import Path
 import constants as const
 from shutil import move
 import logging
+from datetime import datetime
 
 # ----- CONFIGURATION -----
 
@@ -47,16 +48,17 @@ def organize_files():
             category = get_category(item.suffix)
             # Create category folder under source folder directory
             # TODO Create dry-run mode: List all files moves in a list, loop through list and print each line.
-            dest_folder = source_folder/"Organized"/category
-            dest_folder.mkdir(parents=True, exist_ok=True)
-            # Move files from source to destination folder
-            move(item, dest_folder)
-            logging.info(f"Moving {item} to {dest_folder}\n")
-        elif item.is_dir():
-            # TODO iterate subfolders
-            logging.warning(f"Subfolders are not allowed. Move files to source path: [{source_folder}]\n")
-        else:
-            logging.error(f"[{item.name}] is an invalid.\n")
+            target_folder = organized / category
+            target_folder.mkdir(parents=True, exist_ok=True)
+            
+            # Define destination path
+            dest_folder = target_folder / item.name
+            try:
+                # Move files from source to destination folder
+                move(item, dest_folder)
+                logging.info(f"Moving {item.name} to {dest_folder}\n")
+            except Exception as e:
+                logging.error(f"Error moving '{item.name}': {e}\n")
 
 organize_files()
 # TODO Additional Enhancements
