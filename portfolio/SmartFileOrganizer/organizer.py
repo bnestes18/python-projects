@@ -46,9 +46,14 @@ def organize_files():
         # print(file.name)
         if item.is_file():
             category = get_category(item.suffix)
-            # Create category folder under source folder directory
             # TODO Create dry-run mode: List all files moves in a list, loop through list and print each line.
-            target_folder = organized / category
+            
+            # Get the file's modified time as a datetime object
+            mod_time = datetime.fromtimestamp(item.stat().st_mtime)
+            date_folder_name = mod_time.strftime("%Y-%m")  # e.g., "2025-07"
+
+            # Build the full target path with category and date
+            target_folder = organized / category / date_folder_name
             target_folder.mkdir(parents=True, exist_ok=True)
             
             # Define destination path
@@ -56,9 +61,9 @@ def organize_files():
             try:
                 # Move files from source to destination folder
                 move(item, dest_folder)
-                logging.info(f"Moving {item.name} to {dest_folder}\n")
+                logging.info(f"Moving [{item.name}] to [{dest_folder}]\n")
             except Exception as e:
-                logging.error(f"Error moving '{item.name}': {e}\n")
+                logging.error(f"Error moving '[{item.name}]': {e}\n")
 
 organize_files()
 # TODO Additional Enhancements
