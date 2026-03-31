@@ -43,7 +43,6 @@ class GitHubClient:
 
         # TODO implement retries and timeouts
         try:
-            # response = self.client.get(runs_url, headers=self.headers, params=query_params)
             response = self.client.get(runs_url, headers=self.headers, params={"per_page": limit})
             response.raise_for_status()
         except httpx.HTTPStatusError as e:
