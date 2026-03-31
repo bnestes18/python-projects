@@ -75,6 +75,8 @@ class GitHubClient:
         logger.info("Pagination complete")
         return results
         
-with GitHubClient(os.getenv("GITHUB_TOKEN")) as client:
-    runs = client.get_workflow_runs('bnestes18', 'pyweather', 30)
-    jobs = client.get_jobs_for_run('bnestes18', 'pyweather', runs[0]["id"])
+# Runs only when script is executed
+if __name__ == "__main__":
+    with GitHubClient(os.getenv("GITHUB_TOKEN")) as client:
+        runs = client.get_workflow_runs('bnestes18', 'pyweather', 30)
+        jobs = client.get_jobs_for_run('bnestes18', 'pyweather', runs[0]["id"])
