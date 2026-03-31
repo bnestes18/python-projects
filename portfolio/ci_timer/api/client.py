@@ -35,7 +35,7 @@ class GitHubClient:
         # GET /repos/{owner}/{repo}/actions/runs
         # raise a clear RuntimeError if status != 200
         # return response["workflow_runs"]
-        runs_url = f'https://api.github.com/repos/{owner}/{repo}/actions/runs'
+        runs_url = f'/repos/{owner}/{repo}/actions/runs'
 
         # TODO implement retries and timeouts
         try:
