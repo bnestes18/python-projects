@@ -22,10 +22,6 @@ class GitHubClient:
             "Accept": "application/vnd.github+json",
             "X-GitHub-Api-Version": "2022-11-28"
         }
-        self.query_params = {
-            "page": 1,
-            "per_page": 30
-        }
         self.client = httpx.Client(base_url = "https://api.github.com", headers=self.headers)
     
     def __enter__(self):
