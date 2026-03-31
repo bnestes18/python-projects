@@ -52,20 +52,8 @@ class GitHubClient:
         # raise a clear error if status != 200
         # return response["jobs"]
         # NOTE: the API paginates at 30 by default — handle this
-        jobs_url = f'https://api.github.com/repos/{owner}/{repo}/actions/runs/{run_id}/jobs'
-        try:
-            response = self.client.get(jobs_url, headers=self.headers, params=self.query_params)
-            response.raise_for_status()
-        except httpx.HTTPStatusError as e:
-            logging.critical(f"Failed to retrieve jobs: {e}")
-        # Check response link headers for next page's url. Results are paginated.
-        if response.links.get("next"):
-            response = self._paginate(jobs_url)
-            return response[0]["jobs"]
-        else:
-            # No pagination needed. Convert response into dictionary and return the list of jobs
-            response = response.json()
-            return response["jobs"]
+        jobs_url = f'/repos/{owner}/{repo}/actions/runs/{run_id}/jobs'
+        return self._paginate(jobs_url, key="jobs")
 
     def _paginate(self, url: str) -> list[dict]:
         # GitHub uses Link headers for pagination
