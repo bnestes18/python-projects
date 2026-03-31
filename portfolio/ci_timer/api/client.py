@@ -55,19 +55,25 @@ class GitHubClient:
         jobs_url = f'/repos/{owner}/{repo}/actions/runs/{run_id}/jobs'
         return self._paginate(jobs_url, key="jobs")
 
-    def _paginate(self, url: str) -> list[dict]:
+    def _paginate(self, url: str, key: str) -> list[dict]:
         # GitHub uses Link headers for pagination
         # loop: fetch page, collect results, check for "next" in Link header
         # return all accumulated results
         # this will be called by get_jobs_for_run
-        data = []
+        results = []
         next_link_url = url
         while next_link_url:
             response = self.client.get(next_link_url, headers=self.headers)
-            data.append(response.json())
+            data = response.json()
+            # Check if specified key exists in response data. If not, raise an error
+            if key not in data:
+                logger.error(f"specified key '{key}' not found in response data. Available keys are: {list(data.keys())}")
+                raise Exception("Cannot paginate results.")
+            # else, use provided key to extract desired response data
+            results.extend(data[key])
             next_link_url = response.links.get("next", {}).get("url")
         logger.info("Pagination complete")
-        return data
+        return results
         
 with GitHubClient(os.getenv("GITHUB_TOKEN")) as client:
     runs = client.get_workflow_runs('bnestes18', 'pyweather', 30)
