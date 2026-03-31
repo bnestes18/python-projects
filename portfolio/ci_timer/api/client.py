@@ -14,7 +14,7 @@ class GitHubClient:
         # Validate token
         if not token:
             raise Exception("Missing api token parameter.")
-        if type(token) != str:
+        if not isinstance(token, str):
             raise TypeError("Token parameter must be a string.")
         self.token = token
         self.headers = {
