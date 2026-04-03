@@ -13,7 +13,7 @@ class GitHubClient:
     def __init__(self, token: str):
         # Validate token
         if not token:
-            raise Exception("Missing api token parameter.")
+            raise ValueError("Missing or invalid api token.")
         if not isinstance(token, str):
             raise TypeError("Token parameter must be a string.")
         self.token = token
