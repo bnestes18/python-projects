@@ -5,7 +5,6 @@ from datetime import timedelta
 import logging
 
 logger = logging.getLogger("Logger")
-logging.basicConfig(level=logging.INFO)
 
 # Parses key workflow data (steps, jobs, workflow run) into dataclasses and returns full workflow run. 
 def parse_run(raw_run: dict, raw_jobs: list[dict]) -> models.WorkflowRun:

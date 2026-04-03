@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import logging
 
 logger = logging.getLogger("Logger")
-logging.basicConfig(level=logging.INFO)
 
 # Load .env file, if exists
 load_dotenv()
