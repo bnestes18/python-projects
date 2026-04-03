@@ -1,7 +1,8 @@
 import httpx
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv 
 import logging
+import utils
 
 logger = logging.getLogger("Logger")
 

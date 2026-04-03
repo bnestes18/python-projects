@@ -1,5 +1,5 @@
 from api import models
-import helper
+import utils
 from operator import attrgetter
 from datetime import timedelta
 import logging
@@ -9,8 +9,8 @@ logger = logging.getLogger("Logger")
 # Parses key workflow data (steps, jobs, workflow run) into dataclasses and returns full workflow run. 
 def parse_run(raw_run: dict, raw_jobs: list[dict]) -> models.WorkflowRun:
     # convert raw API dicts into dataclass objects
-    jobs = helper.parse_jobs(raw_jobs)
-    workflow = helper.parse_workflow(raw_run, jobs)
+    jobs = utils.parse_jobs(raw_jobs)
+    workflow = utils.parse_workflow(raw_run, jobs)
     return workflow
 
 # Sorts jobs by duration in descending order and returns top n slowest jobs. Default number 'n' is 3 (jobs).
