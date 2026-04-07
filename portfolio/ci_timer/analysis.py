@@ -1,5 +1,5 @@
 from api import models
-import utils
+import utils.utils as utils
 from operator import attrgetter
 from datetime import timedelta
 import logging
