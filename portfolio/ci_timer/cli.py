@@ -58,5 +58,4 @@ def analyze(
         )
         
         # Route to the right output function based on --output flag
-        if output:
-            export.send(wfr, metrics, output)
+        export.send(wfr, metrics, output)
