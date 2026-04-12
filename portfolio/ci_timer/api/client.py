@@ -2,7 +2,7 @@ import httpx
 import os
 from dotenv import load_dotenv 
 import logging
-import utils.utils as utils
+import utils
 
 logger = logging.getLogger("Logger")
 
