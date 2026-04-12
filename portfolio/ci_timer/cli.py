@@ -38,7 +38,6 @@ def analyze(
     repo_name = repo_match[2]
         
     # Instantiate GitHubClient with token
-    # c = client.GitHubClient(cli_token)
     with client.GitHubClient(cli_token) as c:
         # Fetch workflow run's jobs directly if run_id provided
         if run_id:
