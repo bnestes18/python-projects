@@ -28,7 +28,7 @@ def analyze(
     if not repo:
         raise ValueError("Repo name not found. Please provide a name in 'owner/repo' format")
     
-    repo_pattern = "([\w.-]+)\/([\w.-]+)"
+    repo_pattern = r"^([\w.-]+)\/([\w.-]+)$"
     repo_match = re.search(repo_pattern, repo)
     if not repo_match:
         logger.critical("Invalid repo name")
