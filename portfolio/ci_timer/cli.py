@@ -14,11 +14,11 @@ app = Typer()
 
 @app.command()
 def analyze(
-    repo: str,                  # i.e. owner/repo
-    run_id: int = None,         # if omitted, grab the most recent run
-    top: int = 3,               # how many bottlenecks to highlight
-    output: str = "table",      # "table", "chart", "json", "csv"
-    limit: int = 1,             # how many recent runs to fetch if no run_id provided
+    repo: str,                      # i.e. owner/repo
+    run_id: int | None = None,      # if omitted, grab the most recent run
+    top: int = 3,                   # how many bottlenecks to highlight
+    output: str = "table",          # "table", "chart", "json", "csv"
+    limit: int = 1,                 # how many recent runs to fetch if no run_id provided
     token: str | None = None
 ):
     # 1. load token from config (env var or config file)
