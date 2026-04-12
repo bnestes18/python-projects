@@ -35,7 +35,7 @@ def analyze(
         raise ValueError(f"[{repo}] is invalid. Please ensure repository exists and has format 'owner/repo_name'.")
     # else, repository name is valid. Parse owner and repository name.
     owner = repo_match[1]
-    repo_name = repo_match[3]
+    repo_name = repo_match[2]
         
     # Instantiate GitHubClient with token
     # c = client.GitHubClient(cli_token)
