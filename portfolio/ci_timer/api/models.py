@@ -31,4 +31,8 @@ class WorkflowRun:
     created_at: datetime
     updated_at: datetime
     jobs: list[Job]    # populated separately after a second API call
-        
+
+@dataclass
+class WorkflowMetrics:
+    bottlenecks: list[Job]
+    stats: dict
