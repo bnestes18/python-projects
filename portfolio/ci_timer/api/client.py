@@ -44,6 +44,18 @@ class GitHubClient:
         except httpx.RequestError as e: 
             utils.handle_http_error(e, "Network error occurred while retrieving workflow runs")
 
+    def get_workflow_run_by_id(self, owner: str, repo: str, run_id: int) -> dict:
+        
+        # TODO implement retries and timeouts
+        try:
+            response = self.client.get(f"/repos/{owner}/{repo}/actions/runs/{run_id}")
+            response.raise_for_status()
+            return response.json()
+        except httpx.HTTPStatusError as e:
+            utils.handle_http_error(e, "Failed to retrieve specified workflow run")
+        except httpx.RequestError as e: 
+            utils.handle_http_error(e, "Network error occurred while retrieving specified workflow run")
+            
     def get_jobs_for_run(self, owner: str, repo: str, run_id: int) -> list[dict]:
         return self._paginate(f"/repos/{owner}/{repo}/actions/runs/{run_id}/jobs", key="jobs")
 
@@ -73,4 +85,6 @@ class GitHubClient:
 if __name__ == "__main__":
     with GitHubClient(os.getenv("GITHUB_TOKEN")) as client:
         runs = client.get_workflow_runs('bnestes18', 'pyweather', 30)
+        single_run = client.get_workflow_run_by_id('bnestes18', 'pyweather', 22737454979)
+        print(single_run)
         jobs = client.get_jobs_for_run('bnestes18', 'pyweather', runs[0]["id"])
