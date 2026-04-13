@@ -21,10 +21,10 @@ def analyze(
     limit: int = 1,                 # how many recent runs to fetch if no run_id provided
     token: str | None = None
 ):
-    # 1. load token from config (env var or config file)
+    # Load token from config (env var or config file)
     cli_token = utils.resolve_token(token)
         
-    # 2. split repo into owner + repo_name
+    # Split repo into owner + repo_name
     if not repo:
         raise ValueError("Repo name not found. Please provide a name in 'owner/repo' format")
     
