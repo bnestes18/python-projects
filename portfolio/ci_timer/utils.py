@@ -1,5 +1,5 @@
 from api import models
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 from os import getenv
 
@@ -67,6 +67,14 @@ def get_iso_datetime(date: str | None) -> datetime | None:
     if date is None:
         return None
     return datetime.fromisoformat(date.replace("Z", "+00:00"))
+
+# Converts datetime.timedelta type into MM:SS string format
+def format_duration(duration: timedelta) -> str:
+    # TODO expand function to include hours
+    total_seconds = int(duration.total_seconds())
+    minutes = total_seconds // 60
+    seconds = total_seconds % 60
+    return f"{minutes:02d}:{seconds:02d}"
 
 def handle_http_error(e: Exception, context: str):
     msg = f"{context}: {e}"
