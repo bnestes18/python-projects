@@ -1,13 +1,9 @@
 import httpx
 import os
-from dotenv import load_dotenv 
 import logging
 import utils
 
 logger = logging.getLogger("Logger")
-
-# Load .env file, if exists
-load_dotenv()
 
 class GitHubClient:
     def __init__(self, token: str):
