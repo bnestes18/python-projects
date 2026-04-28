@@ -4,7 +4,6 @@ from output import table
 from output import chart
 import api.models as models
 from dataclasses import asdict
-import datetime
 import json
 from enums import OutputType
 import utils
