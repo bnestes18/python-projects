@@ -9,7 +9,7 @@ import json
 from enums import OutputType
 
 # Routes workflow data and metrics to specific export types
-def send(workflow_run: models.WorkflowRun, workflow_metrics: models.WorkflowMetrics, output: str) -> None:
+def send(workflow_run: models.WorkflowRun, workflow_metrics: models.WorkflowMetrics, output: OutputType) -> None:
     if(output==OutputType['TABLE']):
         table.render_table(workflow_run, workflow_metrics)
         print("exported to table")
