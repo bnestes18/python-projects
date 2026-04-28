@@ -1,7 +1,7 @@
 from typer import Typer
 import re
 import logging
-import utils
+from config import DEFAULT_LIMIT, DEFAULT_OUTPUT, DEFAULT_TOP_N, resolve_token
 from api import client
 from api import models
 import analysis
@@ -14,15 +14,15 @@ app = Typer()
 
 @app.command()
 def analyze(
-    repo: str,                      # i.e. owner/repo
-    run_id: int | None = None,      # if omitted, grab the most recent run
-    top: int = 3,                   # how many bottlenecks to highlight
-    output: str = "table",          # "table", "chart", "json", "csv"
-    limit: int = 1,                 # how many recent runs to fetch if no run_id provided
+    repo: str,                             # i.e. owner/repo
+    run_id: int | None = None,             # if omitted, grab the most recent run
+    top: int = DEFAULT_TOP_N,              # how many bottlenecks to highlight
+    output: str = DEFAULT_OUTPUT,          # "table", "chart", "json", "csv"
+    limit: int = DEFAULT_LIMIT,            # how many recent runs to fetch if no run_id provided
     token: str | None = None
 ):
     # Load token from config (env var or config file)
-    cli_token = utils.resolve_token(token)
+    cli_token = resolve_token(token)
         
     # Split repo into owner + repo_name
     if not repo:
