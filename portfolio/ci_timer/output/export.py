@@ -10,16 +10,16 @@ from enums import OutputType
 
 # Routes workflow data and metrics to specific export types
 def send(workflow_run: models.WorkflowRun, workflow_metrics: models.WorkflowMetrics, output: OutputType) -> None:
-    if(output==OutputType['TABLE']):
+    if(output==OutputType.TABLE):
         table.render_table(workflow_run, workflow_metrics)
         print("exported to table")
-    elif(output==OutputType['CHART']):
+    elif(output==OutputType.CHART):
         chart.render_chart(workflow_run, workflow_metrics)
         print("exported to chart")
-    elif(output==OutputType['JSON']):
+    elif(output==OutputType.JSON):
         export_json(workflow_run, workflow_metrics)
         print("exported to json")
-    elif(output==OutputType['CSV']):
+    elif(output==OutputType.CSV):
         export_csv(workflow_run)
         print("exported to csv")
     else:
