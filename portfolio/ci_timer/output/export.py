@@ -41,7 +41,7 @@ def export_json(run: models.WorkflowRun, metrics: models.WorkflowMetrics) -> Non
     serialized_metrics = utils.serialize_value(metrics_dict)
     
     # Set workflow key values
-    wf = {"run": serialized_metrics, "metrics": serialized_metrics}
+    wf = {"run": serialized_run, "metrics": serialized_metrics}
     
     # write json to file at current working directory
     wf_stats = json.dumps(wf)
@@ -49,7 +49,7 @@ def export_json(run: models.WorkflowRun, metrics: models.WorkflowMetrics) -> Non
             f.write(wf_stats)
 
 # Exports workflow data to csv file
-def export_csv(run: models.WorkflowRun):
+def export_csv(run: models.WorkflowRun) -> None:
     working_directory = os.getcwd()
     path = os.path.join(working_directory, f"workflow_{run.id}.{OutputType.CSV.value}")
     
