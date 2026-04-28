@@ -86,3 +86,17 @@ def resolve_token(cli_token: str | None) -> str:
     if not token:
         raise ValueError("No GitHub token found. Set GITHUB_TOKEN env variable or pass --token flag")
     return token
+
+# Custom serializer that handles objects that cannot be auto-converted to JSON
+    # Some examples include 'datetime' or 'timedelta'.
+def serialize_value(val):
+    if isinstance(val, datetime.datetime):
+        return val.isoformat()
+    elif isinstance(val, datetime.timedelta):
+        return val.total_seconds()
+    elif isinstance(val, dict):
+        return {k: serialize_value(v) for k, v in val.items()}
+    elif isinstance(val, list):
+        return [serialize_value(item) for item in val]
+    else:
+        return val

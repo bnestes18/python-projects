@@ -7,6 +7,7 @@ from dataclasses import asdict
 import datetime
 import json
 from enums import OutputType
+import utils
 
 # Routes workflow data and metrics to specific export types
 def send(workflow_run: models.WorkflowRun, workflow_metrics: models.WorkflowMetrics, output: OutputType) -> None:
@@ -33,8 +34,8 @@ def export_json(run: models.WorkflowRun, metrics: models.WorkflowMetrics) -> Non
     # Convert WorkflowRun to a dict
     run_dict = asdict(run)
     metrics_dict = asdict(metrics)
-    serialized_run = serialize_value(run_dict)
-    serialized_metrics = serialize_value(metrics_dict)
+    serialized_run = utils.serialize_value(run_dict)
+    serialized_metrics = utils.serialize_value(metrics_dict)
     
     # Set workflow key values
     keys = ["run", "metrics"]
@@ -70,17 +71,3 @@ def export_csv(run: models.WorkflowRun):
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(csv_headers)
         csv_writer.writerows(flattened_jobs)
-
-# Custom serializer that handles objects that cannot be auto-converted to JSON
-    # Some examples include 'datetime' or 'timedelta'.
-def serialize_value(val):
-    if isinstance(val, datetime.datetime):
-        return val.isoformat()
-    elif isinstance(val, datetime.timedelta):
-        return val.total_seconds()
-    elif isinstance(val, dict):
-        return {k: serialize_value(v) for k, v in val.items()}
-    elif isinstance(val, list):
-        return [serialize_value(item) for item in val]
-    else:
-        return val
