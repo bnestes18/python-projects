@@ -1,7 +1,6 @@
 from api import models
 from datetime import datetime, timedelta
 import logging
-from os import getenv
 
 logger = logging.getLogger("Logger")
 
@@ -80,12 +79,6 @@ def handle_http_error(e: Exception, context: str):
     msg = f"{context}: {e}"
     logger.critical(msg)
     raise RuntimeError(msg) from e
-
-def resolve_token(cli_token: str | None) -> str:
-    token = cli_token or getenv("GITHUB_TOKEN")
-    if not token:
-        raise ValueError("No GitHub token found. Set GITHUB_TOKEN env variable or pass --token flag")
-    return token
 
 # Custom serializer that handles objects that cannot be auto-converted to JSON
     # Some examples include 'datetime' or 'timedelta'.
