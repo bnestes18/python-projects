@@ -44,7 +44,7 @@ def export_json(run: models.WorkflowRun, metrics: models.WorkflowMetrics) -> Non
     
     # write json to file at current working directory
     wf_stats = json.dumps(wf)
-    with open(path, "a") as f:
+    with open(path, "w") as f:
             f.write(wf_stats)
 
 # Exports workflow data to csv file
