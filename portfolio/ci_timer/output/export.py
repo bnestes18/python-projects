@@ -53,11 +53,17 @@ def export_csv(run: models.WorkflowRun):
     path = os.path.join(working_directory, f"workflow_{run.id}.{OutputType.CSV.value}")
     
     flattened_jobs = []
-    csv_headers = ["run_id", "job_name", "status", "conclusion", "started_at", "completed_at", "duration_seconds", "steps"]
+    csv_headers = ["run_id", "job_name", "status", "conclusion", "started_at", "completed_at", "duration_seconds"]
     for job in run.jobs:
-        job_dict = asdict(job)
-        serialized = serialize_value(job_dict).values()
-        flattened_jobs.append(serialized)
+        flattened_jobs.append([
+            run.id,
+            job.name,
+            job.status,
+            job.conclusion,
+            job.started_at.isoformat() if job.started_at else "--",
+            job.completed_at.isoformat() if job.completed_at else "--",
+            int(job.duration.total_seconds()) if job.duration else "--"
+        ])
     
     # Write to csv file with given filename
     with open(path, "w", newline="") as csv_file:
