@@ -8,23 +8,26 @@ import datetime
 import json
 from enums import OutputType
 import utils
+import logging
+
+logger = logging.getLogger("Logger")
 
 # Routes workflow data and metrics to specific export types
 def send(workflow_run: models.WorkflowRun, workflow_metrics: models.WorkflowMetrics, output: OutputType) -> None:
     if(output==OutputType.TABLE):
         table.render_table(workflow_run, workflow_metrics)
-        print("exported to table")
+        logger.info("exported to table")
     elif(output==OutputType.CHART):
         chart.render_chart(workflow_run, workflow_metrics)
-        print("exported to chart")
+        logger.info("exported to chart")
     elif(output==OutputType.JSON):
         export_json(workflow_run, workflow_metrics)
-        print("exported to json")
+        logger.info("exported to json")
     elif(output==OutputType.CSV):
         export_csv(workflow_run)
-        print("exported to csv")
+        logger.info("exported to csv")
     else:
-        print("unsupported output type")
+        logger.warning(f"unsupported output type: {output}")
 
 # Exports workflow data to json file
 def export_json(run: models.WorkflowRun, metrics: models.WorkflowMetrics) -> None:   
