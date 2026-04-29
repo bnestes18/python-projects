@@ -8,7 +8,6 @@ import analysis
 from output import export
 
 logger = logging.getLogger("ci_timer")
-logging.basicConfig(level=logging.INFO)
 
 app = Typer()
 

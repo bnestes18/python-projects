@@ -1,5 +1,7 @@
 from dotenv import load_dotenv
 from os import getenv
+# Set application log level
+logging.basicConfig(level=logging.INFO)
 
 # Load .env file, if exists
 load_dotenv()
