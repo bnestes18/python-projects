@@ -1,5 +1,8 @@
 from dotenv import load_dotenv
 from os import getenv
+import logging
+from enums import OutputType
+
 # Set application log level
 logging.basicConfig(level=logging.INFO)
 
@@ -8,7 +11,7 @@ load_dotenv()
 
 DEFAULT_LIMIT = 10
 DEFAULT_TOP_N = 3
-DEFAULT_OUTPUT = "table"
+DEFAULT_OUTPUT = OutputType.TABLE
 
 # Resolves token when referenced on the commandline, or in a .env file
 def resolve_token(cli_token: str | None) -> str:
