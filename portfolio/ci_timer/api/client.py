@@ -1,5 +1,4 @@
 import httpx
-import os
 import logging
 import utils
 
@@ -76,11 +75,3 @@ class GitHubClient:
                 utils.handle_http_error(e, "Network error occurred during pagination")
         logger.info("Pagination complete")
         return results
-        
-# Runs only when script is executed
-if __name__ == "__main__":
-    with GitHubClient(os.getenv("GITHUB_TOKEN")) as client:
-        runs = client.get_workflow_runs('bnestes18', 'pyweather', 30)
-        single_run = client.get_workflow_run_by_id('bnestes18', 'pyweather', 22737454979)
-        print(single_run)
-        jobs = client.get_jobs_for_run('bnestes18', 'pyweather', runs[0]["id"])
