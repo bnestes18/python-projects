@@ -6,6 +6,7 @@ from api import client
 from api import models
 import analysis
 from output import export
+from enums import OutputType
 
 logger = logging.getLogger("ci_timer")
 
@@ -13,11 +14,11 @@ app = Typer()
 
 @app.command()
 def analyze(
-    repo: str,                             # i.e. owner/repo
-    run_id: int | None = None,             # if omitted, grab the most recent run
-    top: int = DEFAULT_TOP_N,              # how many bottlenecks to highlight
-    output: str = DEFAULT_OUTPUT,          # "table", "chart", "json", "csv"
-    limit: int = DEFAULT_LIMIT,            # how many recent runs to fetch if no run_id provided
+    repo: str,                              # i.e. owner/repo
+    run_id: int | None = None,              # if omitted, grab the most recent run
+    top: int = DEFAULT_TOP_N,               # how many bottlenecks to highlight
+    output: OutputType = DEFAULT_OUTPUT,    # "table", "chart", "json", "csv"
+    limit: int = DEFAULT_LIMIT,             # how many recent runs to fetch if no run_id provided
     token: str | None = None
 ):
     # Load token from config (env var or config file)
