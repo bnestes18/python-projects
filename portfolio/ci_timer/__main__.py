@@ -1,4 +1,4 @@
-from ci_timer.cli import app
+from cli import app
 
 # App entry point
 app()
