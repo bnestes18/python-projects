@@ -52,10 +52,14 @@ def analyze(
         wfr = analysis.parse_run(run, raw_jobs)
         
         # Generate metrics
-        metrics = models.WorkflowMetrics(
-            bottlenecks=analysis.find_bottlenecks(wfr.jobs, top),
-            stats=analysis.compute_summary_stats(wfr.jobs)
-        )
+        try:
+            metrics = models.WorkflowMetrics(
+                bottlenecks=analysis.find_bottlenecks(wfr.jobs, top),
+                stats=analysis.compute_summary_stats(wfr.jobs)
+            )
+        except ValueError as e:
+            logger.error(f"Cannot generate workflow run statistics: {e}")
+            return
         
         # Route to the right output function based on --output flag
         export.send(wfr, metrics, output)

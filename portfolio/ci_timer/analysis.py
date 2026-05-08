@@ -17,22 +17,28 @@ def parse_run(raw_run: dict, raw_jobs: list[dict]) -> models.WorkflowRun:
 def find_bottlenecks(jobs: list[models.Job], top_n: int = 3) -> list[models.Job]:
   if top_n < 1:
     raise ValueError("top_n parameter must be greater than or equal to 1.")
-  # TODO Consider adding more error handling here. Check if 'duration' key exists in provided jobs list
 
   # Filter out cancelled or in-progress runs
   valid_jobs = [j for j in jobs if j.duration is not None]
+  
+  # Check number of jobs. There must be at least one.
+  if not valid_jobs:
+    raise ValueError("No completed jobs found in this workflow run. The run may have been cancelled or all jobs are still in progress")
   
   jobs_sorted = sorted(valid_jobs, key=attrgetter('duration'), reverse=True)
   return jobs_sorted[:top_n]
 
-# Returns a collections of stats from list of workflow jobs
+# Returns a collection of stats from list of workflow jobs
 def compute_summary_stats(jobs: list[models.Job]) -> dict:
   # Filter out cancelled or in-progress runs
   valid_jobs = [j for j in jobs if j.duration is not None]
-      
-  # TODO Consider adding error handling. Check for empty job param
-  total_job_duration = timedelta()
   
+  # Check number of jobs. There must be at least one.
+  if not valid_jobs:
+    raise ValueError("No completed jobs found in this workflow run. The run may have been cancelled or all jobs are still in progress")
+
+  total_job_duration = timedelta()
+
   # Sum all job durations
   for j in valid_jobs:
     total_job_duration += j.duration
