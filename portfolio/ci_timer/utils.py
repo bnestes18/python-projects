@@ -1,4 +1,4 @@
-from api import models
+from ci_timer.api import models as models
 from datetime import datetime, timedelta
 import logging
 

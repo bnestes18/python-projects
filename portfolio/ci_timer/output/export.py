@@ -1,12 +1,12 @@
 import os
 import csv
-from output import table
-from output import chart
-import api.models as models
+from ci_timer.output import table
+from ci_timer.output import chart
+import ci_timer.api.models as models
 from dataclasses import asdict
 import json
-from enums import OutputType
-import utils
+from ci_timer.enums import OutputType
+import ci_timer.utils as utils
 import logging
 
 logger = logging.getLogger("Logger")

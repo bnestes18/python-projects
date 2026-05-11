@@ -1,12 +1,12 @@
 from typer import Typer
 import re
 import logging
-from config import DEFAULT_LIMIT, DEFAULT_OUTPUT, DEFAULT_TOP_N, resolve_token
-from api import client
-from api import models
-import analysis
-from output import export
-from enums import OutputType
+from ci_timer.config import DEFAULT_LIMIT, DEFAULT_OUTPUT, DEFAULT_TOP_N, resolve_token
+from ci_timer.api import client
+from ci_timer.api import models
+import ci_timer.analysis as analysis
+from ci_timer.output import export
+from ci_timer.enums import OutputType
 
 logger = logging.getLogger("ci_timer")
 

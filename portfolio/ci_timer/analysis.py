@@ -1,5 +1,5 @@
-from api import models
-import utils
+from ci_timer.api import models as models
+import ci_timer.utils as utils
 from operator import attrgetter
 from datetime import timedelta
 import logging

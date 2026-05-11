@@ -1,6 +1,6 @@
 from rich.console import Console
-from api import models
-import utils
+from ci_timer.api import models as models
+import ci_timer.utils as utils
 
 # Displays job duration in a horizontal bar chart
 def render_chart(run: models.WorkflowRun, metrics: models.WorkflowMetrics) -> None:

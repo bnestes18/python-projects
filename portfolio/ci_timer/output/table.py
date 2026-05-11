@@ -3,8 +3,8 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.columns import Columns
 from rich.align import Align
-import api.models as models
-import utils
+import ci_timer.api.models as models
+import ci_timer.utils as utils
 
 # Displays workflow run statistics in a Tabular format
 def render_table(run: models.WorkflowRun, metrics: models.WorkflowMetrics):

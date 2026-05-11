@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from os import getenv
 import logging
-from enums import OutputType
+from ci_timer.enums import OutputType
 
 # Set application log level
 logging.basicConfig(level=logging.INFO)

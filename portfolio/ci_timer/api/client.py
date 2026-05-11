@@ -1,6 +1,6 @@
 import httpx
 import logging
-import utils
+import ci_timer.utils as utils
 
 logger = logging.getLogger("Logger")
 
