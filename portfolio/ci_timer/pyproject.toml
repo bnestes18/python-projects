@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ci_timer"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[project.scripts]
+ci-timer = "ci_timer.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ci_timer*"]
